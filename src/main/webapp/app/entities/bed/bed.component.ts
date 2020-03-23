@@ -10,6 +10,7 @@ import { IBed } from 'app/shared/model/bed.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { BedService } from './bed.service';
 import { BedDeleteDialogComponent } from './bed-delete-dialog.component';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-bed',
@@ -30,7 +31,8 @@ export class BedComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected accountService: AccountService
   ) {}
 
   loadPage(page?: number): void {
@@ -96,7 +98,20 @@ export class BedComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.beds = data ? data : [];
+
+    // TODO : Remove me as sooooooooooooon as possible !!!!!
+    if (this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      this.beds = data ? data : [];
+    } else {
+      this.beds = data
+        ? data.filter(bed => {
+            if (bed && bed.hospital) {
+              return bed.hospital.name === 'Hopital test';
+            }
+            return false;
+          })
+        : [];
+    }
   }
 
   protected onError(): void {
