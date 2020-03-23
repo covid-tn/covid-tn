@@ -33,8 +33,11 @@ spring:
       enabled: false
   data:
     mongodb:
-      uri: mongodb://localhost:27017
-      database: covid
+      host: ds263295.mlab.com
+      port: 63295
+      database: covid-tn-rqt
+      username: covid-user
+      password: covid19
   mail:
     host: localhost
     port: 25
