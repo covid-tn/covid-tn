@@ -27,6 +27,36 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <a class="dropdown-item" routerLink="hospital" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span>Hospital</span>
+                        </a>
+                    </li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <a class="dropdown-item" routerLink="address" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span>Address</span>
+                        </a>
+                    </li>
+                    <!--<li>-->
+                        <!--<a class="dropdown-item" routerLink="profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                            <!--<fa-icon icon="asterisk" fixedWidth="true"></fa-icon>-->
+                            <!--<span>Profile</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a class="dropdown-item" routerLink="bed" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span>Bed</span>
+                        </a>
+                    </li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <a class="dropdown-item" routerLink="bed-status-history" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span>Bed Status History</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

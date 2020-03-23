@@ -1,0 +1,47 @@
+{
+    "name": "Hospital",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "address",
+            "otherEntityRelationshipName": "hospital",
+            "relationshipValidateRules": "required",
+            "relationshipName": "address",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "hospital",
+            "relationshipName": "headOfSearvice",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "bed",
+            "otherEntityRelationshipName": "hospital",
+            "relationshipName": "bed"
+        }
+    ],
+    "changelogDate": "20200323223006",
+    "entityTableName": "hospital",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

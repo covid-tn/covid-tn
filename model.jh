@@ -1,0 +1,47 @@
+entity Hospital {
+	name String required,
+}
+
+entity Address {
+	streetName String required,
+    city String required,
+    region String,
+    postalCode String
+}
+
+entity Profile {
+	pin String maxlength(5) required
+}
+
+entity Bed {
+	status BedStatus
+}
+
+entity BedStatusHistory {
+    createdDate ZonedDateTime
+}
+enum BedStatus {
+    AVAILABLE, RESERVED, OCCUPIED, OUTOFORDER
+}
+
+relationship OneToOne{
+	BedStatusHistory{bed} to Bed,
+    BedStatusHistory{createdBy} to User,
+
+	Profile{user} to User,
+
+	Hospital{address required} to Address,
+    Hospital{headOfSearvice} to User
+}
+
+relationship OneToMany {
+	Hospital{bed} to Bed{Hospital(name)}
+}
+
+relationship ManyToOne {
+  Profile{hospital(name)} to Hospital
+}
+
+service all with serviceImpl
+
+paginate all with pagination

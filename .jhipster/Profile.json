@@ -1,0 +1,41 @@
+{
+    "name": "Profile",
+    "fields": [
+        {
+            "fieldName": "pin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 5
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "profile",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "hospital",
+            "otherEntityRelationshipName": "profile",
+            "relationshipName": "hospital",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200323223008",
+    "entityTableName": "profile",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
