@@ -16,6 +16,14 @@ You will only need to run this command when dependencies change in [package.json
 
 We use npm scripts and [Webpack][] as our build system.
 
+2 . You need to have a running MongoDB server on your machine, the easiest way to start a mongodb database in a docker container, run:
+
+    docker-compose -f src/main/docker/mongodb.yml up -d
+
+To stop it and remove the container, run:
+
+    docker-compose -f src/main/docker/mongodb.yml down
+
 Run the following commands in two separate terminals to create a blissful development experience where your browser
 auto-refreshes when files change on your hard drive.
 
