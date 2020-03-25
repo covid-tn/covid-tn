@@ -1,11 +1,10 @@
 package fr.covid.app.service.impl;
 
-import fr.covid.app.service.AddressService;
 import fr.covid.app.domain.Address;
 import fr.covid.app.repository.AddressRepository;
+import fr.covid.app.service.AddressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

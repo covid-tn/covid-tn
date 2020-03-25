@@ -1,11 +1,10 @@
 package fr.covid.app.service.impl;
 
-import fr.covid.app.service.BedService;
 import fr.covid.app.domain.Bed;
 import fr.covid.app.repository.BedRepository;
+import fr.covid.app.service.BedService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

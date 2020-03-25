@@ -1,8 +1,8 @@
 package fr.covid.app.service;
 
-import io.github.jhipster.config.JHipsterProperties;
 import fr.covid.app.config.audit.AuditEventConverter;
 import fr.covid.app.repository.PersistenceAuditEventRepository;
+import io.github.jhipster.config.JHipsterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.audit.AuditEvent;

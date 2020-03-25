@@ -1,13 +1,14 @@
 package fr.covid.app.service;
 
+import fr.covid.app.CovidApp;
 import fr.covid.app.domain.PersistentAuditEvent;
 import fr.covid.app.repository.PersistenceAuditEventRepository;
-import fr.covid.app.CovidApp;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 

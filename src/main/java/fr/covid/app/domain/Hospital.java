@@ -1,10 +1,7 @@
 package fr.covid.app.domain;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import javax.validation.constraints.*;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,28 +9,29 @@ import java.util.Set;
 /**
  * A Hospital.
  */
-@Document(collection = "hospital")
+@Entity(name = "hospital")
 public class Hospital implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "hospital_id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private String id;
 
     @NotNull
-    @Field("name")
+    @Column(name = "name")
     private String name;
 
-    @DBRef
-    @Field("address")
+    @JoinColumn
+    @Column(name = "address")
     private Address address;
 
-    @DBRef
-    @Field("headOfSearvice")
-    private User headOfSearvice;
+    @JoinColumn
+    @Column(name = "headOfService")
+    private User headOfService;
 
-    @DBRef
-    @Field("bed")
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
     private Set<Bed> beds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -71,17 +69,17 @@ public class Hospital implements Serializable {
         this.address = address;
     }
 
-    public User getHeadOfSearvice() {
-        return headOfSearvice;
+    public User getHeadOfService() {
+        return headOfService;
     }
 
     public Hospital headOfSearvice(User user) {
-        this.headOfSearvice = user;
+        this.headOfService = user;
         return this;
     }
 
-    public void setHeadOfSearvice(User user) {
-        this.headOfSearvice = user;
+    public void setHeadOfService(User user) {
+        this.headOfService = user;
     }
 
     public Set<Bed> getBeds() {

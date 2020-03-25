@@ -8,9 +8,7 @@ import fr.covid.app.repository.UserRepository;
 import fr.covid.app.security.AuthoritiesConstants;
 import fr.covid.app.security.SecurityUtils;
 import fr.covid.app.service.dto.UserDTO;
-
 import io.github.jhipster.security.RandomUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -263,7 +261,7 @@ public class UserService {
         return userRepository.findOneByLogin(login);
     }
 
-    public Optional<User> getUserWithAuthorities(String id) {
+    public Optional<User> getUserWithAuthorities(Integer id) {
         return userRepository.findById(id);
     }
 

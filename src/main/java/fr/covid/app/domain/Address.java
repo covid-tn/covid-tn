@@ -1,34 +1,33 @@
 package fr.covid.app.domain;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import javax.validation.constraints.*;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * A Address.
  */
-@Document(collection = "address")
+ @Entity(name = "address")
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private String id;
 
     @NotNull
-    @Field("street_name")
+    @Column(name = "street_name")
     private String streetName;
 
     @NotNull
-    @Field("city")
+    @Column(name = "city")
     private String city;
 
-    @Field("region")
+    @Column(name = "region")
     private String region;
 
-    @Field("postal_code")
+    @Column(name = "postal_code")
     private String postalCode;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

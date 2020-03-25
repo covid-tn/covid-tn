@@ -5,9 +5,7 @@ import fr.covid.app.config.Constants;
 import fr.covid.app.domain.User;
 import fr.covid.app.repository.UserRepository;
 import fr.covid.app.service.dto.UserDTO;
-
 import io.github.jhipster.security.RandomUtil;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

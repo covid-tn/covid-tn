@@ -3,10 +3,12 @@ package fr.covid.app.service.mapper;
 import fr.covid.app.domain.Authority;
 import fr.covid.app.domain.User;
 import fr.covid.app.service.dto.UserDTO;
-
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -70,7 +72,7 @@ public class UserMapper {
         return authorities;
     }
 
-    public User userFromId(String id) {
+    public User userFromId(Integer id) {
         if (id == null) {
             return null;
         }

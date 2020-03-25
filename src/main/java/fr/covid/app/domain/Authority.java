@@ -1,16 +1,18 @@
 package fr.covid.app.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
  * An authority (a security role) used by Spring Security.
  */
-@Document(collection = "jhi_authority")
+ @Entity(name = "jhi_authority")
 public class Authority implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,6 +20,7 @@ public class Authority implements Serializable {
     @NotNull
     @Size(max = 50)
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private String name;
 
     public String getName() {
@@ -27,6 +30,9 @@ public class Authority implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    @ManyToMany(mappedBy = "authorities")
+    Collection<User> users = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

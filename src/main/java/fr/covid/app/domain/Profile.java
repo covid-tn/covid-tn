@@ -1,35 +1,35 @@
 package fr.covid.app.domain;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
  * A Profile.
  */
-@Document(collection = "profile")
+ @Entity(name = "profile")
 public class Profile implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private String id;
 
     @NotNull
     @Size(max = 5)
-    @Field("pin")
+    @Column(name = "pin")
     private String pin;
 
-    @DBRef
-    @Field("user")
+    @JoinColumn
+    @Column(name = "user")
     private User user;
 
-    @DBRef
-    @Field("hospital")
+    @JoinColumn(name = "hospital_id")
+    @OneToOne(optional = false)
     @JsonIgnoreProperties("profiles")
     private Hospital hospital;
 

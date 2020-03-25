@@ -1,11 +1,13 @@
 package fr.covid.app.service.dto;
 
 import fr.covid.app.config.Constants;
-
 import fr.covid.app.domain.Authority;
 import fr.covid.app.domain.User;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class UserDTO {
 
-    private String id;
+    private Integer id;
 
     @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -72,11 +74,11 @@ public class UserDTO {
             .collect(Collectors.toSet());
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

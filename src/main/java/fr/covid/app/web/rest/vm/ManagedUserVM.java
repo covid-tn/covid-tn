@@ -1,6 +1,7 @@
 package fr.covid.app.web.rest.vm;
 
 import fr.covid.app.service.dto.UserDTO;
+
 import javax.validation.constraints.Size;
 
 /**

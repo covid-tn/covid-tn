@@ -1,30 +1,29 @@
 package fr.covid.app.domain;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
-import java.io.Serializable;
-
 import fr.covid.app.domain.enumeration.BedStatus;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * A Bed.
  */
-@Document(collection = "bed")
+ @Entity(name = "bed")
 public class Bed implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private String id;
 
-    @Field("status")
+    @Column(name = "status")
+    @Enumerated(EnumType.ORDINAL)
     private BedStatus status;
 
-    @DBRef
-    @Field("hospital")
+    @JoinColumn(name = "hospital_id", nullable = false)
+    @ManyToOne
     @JsonIgnoreProperties("beds")
     private Hospital hospital;
 

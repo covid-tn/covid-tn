@@ -1,7 +1,6 @@
 package fr.covid.app.service;
 
 import fr.covid.app.domain.Address;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

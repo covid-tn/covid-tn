@@ -1,8 +1,9 @@
 package fr.covid.app.domain;
 
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 import fr.covid.app.web.rest.TestUtil;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BedTest {
 

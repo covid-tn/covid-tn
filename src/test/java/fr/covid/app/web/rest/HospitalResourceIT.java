@@ -1,12 +1,11 @@
 package fr.covid.app.web.rest;
 
 import fr.covid.app.CovidApp;
-import fr.covid.app.domain.Hospital;
 import fr.covid.app.domain.Address;
+import fr.covid.app.domain.Hospital;
 import fr.covid.app.repository.HospitalRepository;
 import fr.covid.app.service.HospitalService;
 import fr.covid.app.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -18,7 +17,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
-
 
 import java.util.List;
 

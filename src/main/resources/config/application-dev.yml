@@ -36,9 +36,8 @@ spring:
     serialization:
       indent-output: true
   data:
-    mongodb:
-      uri: mongodb://localhost:27017
-      database: covid
+    h2:
+      uri: jdbc:h2:mem:jhipster
   mail:
     host: localhost
     port: 25

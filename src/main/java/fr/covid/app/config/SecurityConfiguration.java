@@ -1,10 +1,8 @@
 package fr.covid.app.config;
 
-import fr.covid.app.security.*;
-import fr.covid.app.security.jwt.*;
-
-import org.springframework.beans.factory.BeanInitializationException;
-import org.springframework.beans.factory.InitializingBean;
+import fr.covid.app.security.AuthoritiesConstants;
+import fr.covid.app.security.jwt.JWTConfigurer;
+import fr.covid.app.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;

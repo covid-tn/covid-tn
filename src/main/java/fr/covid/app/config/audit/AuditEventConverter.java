@@ -1,7 +1,6 @@
 package fr.covid.app.config.audit;
 
 import fr.covid.app.domain.PersistentAuditEvent;
-
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;

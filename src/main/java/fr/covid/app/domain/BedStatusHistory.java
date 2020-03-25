@@ -1,32 +1,29 @@
 package fr.covid.app.domain;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 /**
  * A BedStatusHistory.
  */
-@Document(collection = "bed_status_history")
+ @Entity(name = "bed_status_history")
 public class BedStatusHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private String id;
 
-    @Field("created_date")
+    @Column(name = "created_date")
     private ZonedDateTime createdDate;
 
-    @DBRef
-    @Field("bed")
+    @JoinColumn
+    @Column(name = "bed")
     private Bed bed;
 
-    @DBRef
-    @Field("createdBy")
+    @JoinColumn
+    @Column(name = "createdBy")
     private User createdBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

@@ -1,12 +1,11 @@
 package fr.covid.app.web.rest;
 
 import fr.covid.app.CovidApp;
-import io.github.jhipster.config.JHipsterProperties;
 import fr.covid.app.config.audit.AuditEventConverter;
 import fr.covid.app.domain.PersistentAuditEvent;
 import fr.covid.app.repository.PersistenceAuditEventRepository;
-
 import fr.covid.app.service.AuditEventService;
+import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

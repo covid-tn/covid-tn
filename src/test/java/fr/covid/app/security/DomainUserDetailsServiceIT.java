@@ -3,7 +3,6 @@ package fr.covid.app.security;
 import fr.covid.app.CovidApp;
 import fr.covid.app.domain.User;
 import fr.covid.app.repository.UserRepository;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

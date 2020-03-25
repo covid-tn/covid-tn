@@ -5,7 +5,6 @@ import fr.covid.app.domain.BedStatusHistory;
 import fr.covid.app.repository.BedStatusHistoryRepository;
 import fr.covid.app.service.BedStatusHistoryService;
 import fr.covid.app.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -18,15 +17,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
-
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 
-import static fr.covid.app.web.rest.TestUtil.sameInstant;
 import static fr.covid.app.web.rest.TestUtil.createFormattingConversionService;
+import static fr.covid.app.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

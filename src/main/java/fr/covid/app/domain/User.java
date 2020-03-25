@@ -1,13 +1,10 @@
 package fr.covid.app.domain;
 
-import fr.covid.app.config.Constants;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import fr.covid.app.config.Constants;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -21,18 +18,16 @@ import java.util.Set;
 /**
  * A user.
  */
-@org.springframework.data.mongodb.core.mapping.Document(collection = "jhi_user")
+@Entity(name = "jhi_user")
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private String id;
+
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
-    @Indexed
     private String login;
 
     @JsonIgnore
@@ -41,51 +36,45 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String password;
 
     @Size(max = 50)
-    @Field("first_name")
+    @Column(name = "first_name")
     private String firstName;
 
     @Size(max = 50)
-    @Field("last_name")
+    @Column(name = "last_name")
     private String lastName;
 
     @Email
     @Size(min = 5, max = 254)
-    @Indexed
     private String email;
 
     private boolean activated = false;
 
     @Size(min = 2, max = 10)
-    @Field("lang_key")
+    @Column(name = "lang_key")
     private String langKey;
 
     @Size(max = 256)
-    @Field("image_url")
+    @Column(name="image_url")
     private String imageUrl;
 
     @Size(max = 20)
-    @Field("activation_key")
+    @Column(name = "activation_key")
     @JsonIgnore
     private String activationKey;
 
     @Size(max = 20)
-    @Field("reset_key")
+    @Column(name = "reset_key")
     @JsonIgnore
     private String resetKey;
 
-    @Field("reset_date")
+    @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_profile", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "auth_id", referencedColumnName = "name"))
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getLogin() {
         return login;
@@ -192,7 +181,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         if (!(o instanceof User)) {
             return false;
         }
-        return id != null && id.equals(((User) o).id);
+        return getId()!= null && getId().equals(((User) o).getId());
     }
 
     @Override

@@ -8,10 +8,12 @@ import fr.covid.app.service.MailService;
 import fr.covid.app.service.UserService;
 import fr.covid.app.service.dto.PasswordChangeDTO;
 import fr.covid.app.service.dto.UserDTO;
-import fr.covid.app.web.rest.errors.*;
+import fr.covid.app.web.rest.errors.EmailAlreadyUsedException;
+import fr.covid.app.web.rest.errors.EmailNotFoundException;
+import fr.covid.app.web.rest.errors.InvalidPasswordException;
+import fr.covid.app.web.rest.errors.LoginAlreadyUsedException;
 import fr.covid.app.web.rest.vm.KeyAndPasswordVM;
 import fr.covid.app.web.rest.vm.ManagedUserVM;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Optional;
 
 /**
  * REST controller for managing the current user's account.
