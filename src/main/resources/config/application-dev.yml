@@ -37,8 +37,13 @@ spring:
       indent-output: true
   data:
     mongodb:
-      uri: mongodb://localhost:27017
-      database: covid
+      host: ds137550.mlab.com
+      port: 37550
+      database: covid-tn-dev
+      username: covid-dev
+      password: covid19
+  #      uri: mongodb://localhost:27017
+  #      database: covid
   mail:
     host: localhost
     port: 25
