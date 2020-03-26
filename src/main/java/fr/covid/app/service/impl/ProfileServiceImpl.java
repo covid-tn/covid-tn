@@ -57,7 +57,7 @@ public class ProfileServiceImpl implements ProfileService {
      * @return the entity.
      */
     @Override
-    public Optional<Profile> findOne(String id) {
+    public Optional<Profile> findOne(Long id) {
         log.debug("Request to get Profile : {}", id);
         return profileRepository.findById(id);
     }
@@ -68,7 +68,7 @@ public class ProfileServiceImpl implements ProfileService {
      * @param id the id of the entity.
      */
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete Profile : {}", id);
         profileRepository.deleteById(id);
     }

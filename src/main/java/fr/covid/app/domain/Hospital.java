@@ -15,9 +15,8 @@ public class Hospital implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "hospital_id")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     @NotNull
     @Column(name = "name")
@@ -35,11 +34,13 @@ public class Hospital implements Serializable {
     private Set<Bed> beds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public String getId() {
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

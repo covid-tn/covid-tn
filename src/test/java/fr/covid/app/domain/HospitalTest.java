@@ -11,11 +11,11 @@ public class HospitalTest {
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Hospital.class);
         Hospital hospital1 = new Hospital();
-        hospital1.setId("id1");
+        hospital1.setId(1l);
         Hospital hospital2 = new Hospital();
         hospital2.setId(hospital1.getId());
         assertThat(hospital1).isEqualTo(hospital2);
-        hospital2.setId("id2");
+        hospital2.setId(1l);
         assertThat(hospital1).isNotEqualTo(hospital2);
         hospital1.setId(null);
         assertThat(hospital1).isNotEqualTo(hospital2);

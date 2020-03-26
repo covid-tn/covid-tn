@@ -15,7 +15,7 @@ import java.time.Instant;
  * last modified by date.
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

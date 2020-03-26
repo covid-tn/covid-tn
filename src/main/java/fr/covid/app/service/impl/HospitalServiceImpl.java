@@ -57,7 +57,7 @@ public class HospitalServiceImpl implements HospitalService {
      * @return the entity.
      */
     @Override
-    public Optional<Hospital> findOne(String id) {
+    public Optional<Hospital> findOne(Long id) {
         log.debug("Request to get Hospital : {}", id);
         return hospitalRepository.findById(id);
     }
@@ -68,7 +68,7 @@ public class HospitalServiceImpl implements HospitalService {
      * @param id the id of the entity.
      */
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete Hospital : {}", id);
         hospitalRepository.deleteById(id);
     }

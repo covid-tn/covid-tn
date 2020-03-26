@@ -148,11 +148,11 @@ public class AuditResourceIT {
     public void testPersistentAuditEventEquals() throws Exception {
         TestUtil.equalsVerifier(PersistentAuditEvent.class);
         PersistentAuditEvent auditEvent1 = new PersistentAuditEvent();
-        auditEvent1.setId("id1");
+        auditEvent1.setId(1l);
         PersistentAuditEvent auditEvent2 = new PersistentAuditEvent();
         auditEvent2.setId(auditEvent1.getId());
         assertThat(auditEvent1).isEqualTo(auditEvent2);
-        auditEvent2.setId("id2");
+        auditEvent2.setId(2l);
         assertThat(auditEvent1).isNotEqualTo(auditEvent2);
         auditEvent1.setId(null);
         assertThat(auditEvent1).isNotEqualTo(auditEvent2);

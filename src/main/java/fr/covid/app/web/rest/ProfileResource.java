@@ -105,7 +105,7 @@ public class ProfileResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profile, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/profiles/{id}")
-    public ResponseEntity<Profile> getProfile(@PathVariable String id) {
+    public ResponseEntity<Profile> getProfile(@PathVariable Long id) {
         log.debug("REST request to get Profile : {}", id);
         Optional<Profile> profile = profileService.findOne(id);
         return ResponseUtil.wrapOrNotFound(profile);
@@ -118,9 +118,9 @@ public class ProfileResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/profiles/{id}")
-    public ResponseEntity<Void> deleteProfile(@PathVariable String id) {
+    public ResponseEntity<Void> deleteProfile(@PathVariable Long id) {
         log.debug("REST request to delete Profile : {}", id);
         profileService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

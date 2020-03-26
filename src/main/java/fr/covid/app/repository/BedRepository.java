@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface BedRepository extends JpaRepository<Bed, String> {
+public interface BedRepository extends JpaRepository<Bed, Long> {
 
 }

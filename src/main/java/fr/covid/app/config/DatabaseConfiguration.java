@@ -3,6 +3,7 @@ package fr.covid.app.config;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +16,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @Configuration
 @EnableJpaRepositories("fr.covid.app.repository")
 @Profile("!" + JHipsterConstants.SPRING_PROFILE_CLOUD)
-@Import(value = DataSourceAutoConfiguration.class)
+@EnableAutoConfiguration
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 public class DatabaseConfiguration {
 

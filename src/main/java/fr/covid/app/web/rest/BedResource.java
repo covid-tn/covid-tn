@@ -104,7 +104,7 @@ public class BedResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the bed, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/beds/{id}")
-    public ResponseEntity<Bed> getBed(@PathVariable String id) {
+    public ResponseEntity<Bed> getBed(@PathVariable Long id) {
         log.debug("REST request to get Bed : {}", id);
         Optional<Bed> bed = bedService.findOne(id);
         return ResponseUtil.wrapOrNotFound(bed);
@@ -117,9 +117,9 @@ public class BedResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/beds/{id}")
-    public ResponseEntity<Void> deleteBed(@PathVariable String id) {
+    public ResponseEntity<Void> deleteBed(@PathVariable Long id) {
         log.debug("REST request to delete Bed : {}", id);
         bedService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

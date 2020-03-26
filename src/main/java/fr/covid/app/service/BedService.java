@@ -34,12 +34,12 @@ public interface BedService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Bed> findOne(String id);
+    Optional<Bed> findOne(Long id);
 
     /**
      * Delete the "id" bed.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Long id);
 }

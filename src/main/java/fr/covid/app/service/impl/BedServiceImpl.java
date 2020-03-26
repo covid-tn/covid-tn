@@ -57,7 +57,7 @@ public class BedServiceImpl implements BedService {
      * @return the entity.
      */
     @Override
-    public Optional<Bed> findOne(String id) {
+    public Optional<Bed> findOne(Long id) {
         log.debug("Request to get Bed : {}", id);
         return bedRepository.findById(id);
     }
@@ -68,7 +68,7 @@ public class BedServiceImpl implements BedService {
      * @param id the id of the entity.
      */
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete Bed : {}", id);
         bedRepository.deleteById(id);
     }

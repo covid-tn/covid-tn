@@ -119,7 +119,7 @@ public class ProfileResourceIT {
         int databaseSizeBeforeCreate = profileRepository.findAll().size();
 
         // Create the Profile with an existing ID
-        profile.setId("existing_id");
+        profile.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restProfileMockMvc.perform(post("/api/profiles")

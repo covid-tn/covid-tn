@@ -119,7 +119,7 @@ public class BedResourceIT {
         int databaseSizeBeforeCreate = bedRepository.findAll().size();
 
         // Create the Bed with an existing ID
-        bed.setId("existing_id");
+        bed.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restBedMockMvc.perform(post("/api/beds")

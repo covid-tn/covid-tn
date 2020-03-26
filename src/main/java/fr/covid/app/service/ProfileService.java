@@ -34,12 +34,12 @@ public interface ProfileService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Profile> findOne(String id);
+    Optional<Profile> findOne(Long id);
 
     /**
      * Delete the "id" profile.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Long id);
 }

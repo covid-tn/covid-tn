@@ -20,7 +20,7 @@ public class PersistentAuditEvent implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "event_id")
-    private String id;
+    private Long id;
 
     @NotNull
     private String principal;
@@ -34,11 +34,11 @@ public class PersistentAuditEvent implements Serializable {
     @Transient//TODO
     private Map<String, String> data = new HashMap<>();
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

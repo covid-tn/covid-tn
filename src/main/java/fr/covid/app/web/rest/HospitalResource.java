@@ -105,7 +105,7 @@ public class HospitalResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the hospital, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/hospitals/{id}")
-    public ResponseEntity<Hospital> getHospital(@PathVariable String id) {
+    public ResponseEntity<Hospital> getHospital(@PathVariable Long id) {
         log.debug("REST request to get Hospital : {}", id);
         Optional<Hospital> hospital = hospitalService.findOne(id);
         return ResponseUtil.wrapOrNotFound(hospital);
@@ -118,9 +118,9 @@ public class HospitalResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/hospitals/{id}")
-    public ResponseEntity<Void> deleteHospital(@PathVariable String id) {
+    public ResponseEntity<Void> deleteHospital(@PathVariable Long id) {
         log.debug("REST request to delete Hospital : {}", id);
         hospitalService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

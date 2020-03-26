@@ -130,7 +130,7 @@ public class HospitalResourceIT {
         int databaseSizeBeforeCreate = hospitalRepository.findAll().size();
 
         // Create the Hospital with an existing ID
-        hospital.setId("existing_id");
+        hospital.setId(1l);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restHospitalMockMvc.perform(post("/api/hospitals")

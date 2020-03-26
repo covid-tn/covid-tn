@@ -17,7 +17,7 @@ public class Profile implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     @NotNull
     @Size(max = 5)
@@ -34,11 +34,13 @@ public class Profile implements Serializable {
     private Hospital hospital;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public String getId() {
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
