@@ -6,17 +6,15 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                           formControlName="name"/>
-                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('name')?.errors?.required">
-                        This field is required.
+                    <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
+                    <div
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
@@ -25,28 +23,98 @@
                     <label class="form-control-label" for="field_address">Address</label>
                     <select class="form-control" id="field_address" name="address" formControlName="address">
                         <option *ngIf="!editForm.get('address')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="addressOption.id === editForm.get('address')!.value?.id ? editForm.get('address')!.value : addressOption" *ngFor="let addressOption of addresses; trackBy: trackById">{{addressOption.id}}</option>
+                        <option
+                            [ngValue]="addressOption.id === editForm.get('address')!.value?.id ? editForm.get('address')!.value : addressOption"
+                            *ngFor="let addressOption of addresses; trackBy: trackById">{{addressOption.streetName}}
+                        </option>
                     </select>
                 </div>
-                <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('address')?.errors?.required">
+                <div
+                    *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('address')?.errors?.required">
                         This field is required.
                     </small>
                 </div>
+
+                <div class="form-group">
+                    <a href="javascript:void(0);" (click)="addedaddress=!addedaddress">Add new address</a>
+                </div>
+
+                <div class="row justify-content-center card" *ngIf=(addedaddress)>
+                    <div class="col-8">
+                        <form name="addaddressform" role="form" novalidate (ngSubmit)="saveadress()"
+                            [formGroup]="addaddressform">
+                            <h2 id="jhi-address-heading">Create an Address</h2>
+                            <div>
+                                <jhi-alert-error></jhi-alert-error>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="field_streetName">Street Name</label>
+                                    <input type="text" class="form-control" name="streetName" id="field_streetName"
+                                        formControlName="streetName" />
+                                    <div
+                                        *ngIf="addaddressform.get('streetName')!.invalid && (addaddressform.get('streetName')!.dirty || addaddressform.get('streetName')!.touched)">
+                                        <small class="form-text text-danger"
+                                            *ngIf="addaddressform.get('streetName')?.errors?.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="field_city">City</label>
+                                    <input type="text" class="form-control" name="city" id="field_city"
+                                        formControlName="city" />
+                                    <div
+                                        *ngIf="addaddressform.get('city')!.invalid && (addaddressform.get('city')!.dirty || addaddressform.get('city')!.touched)">
+                                        <small class="form-text text-danger"
+                                            *ngIf="addaddressform.get('city')?.errors?.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="field_region">Region</label>
+                                    <input type="text" class="form-control" name="region" id="field_region"
+                                        formControlName="region" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="field_postalCode">Postal Code</label>
+                                    <input type="text" class="form-control" name="postalCode" id="field_postalCode"
+                                        formControlName="postalCode" />
+                                </div>
+
+                            </div>
+                            <div>
+                                <button type="button" id="cancel-save" class="btn btn-secondary"
+                                    (click)="addedaddress=!addedaddress">
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                                </button>
+                                <button type="submit" id="save-entity" [disabled]="addaddressform.invalid || isSaving"
+                                    class="btn btn-primary">
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <br>
                 <div class="form-group">
                     <label class="form-control-label" for="field_headOfSearvice">Head Of Searvice</label>
-                    <select class="form-control" id="field_headOfSearvice" name="headOfSearvice" formControlName="headOfSearvice">
+                    <select class="form-control" id="field_headOfSearvice" name="headOfSearvice"
+                        formControlName="headOfSearvice">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === editForm.get('headOfSearvice')!.value?.id ? editForm.get('headOfSearvice')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
+                        <option
+                            [ngValue]="userOption.id === editForm.get('headOfSearvice')!.value?.id ? editForm.get('headOfSearvice')!.value : userOption"
+                            *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
                     </select>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

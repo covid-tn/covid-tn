@@ -1,69 +1,105 @@
 <div>
     <h2 id="page-heading">
         <span>Beds</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bed" [routerLink]="['/bed/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bed"
+            [routerLink]="['/bed/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Create a new Bed
+            <span>
+                Create a new Bed
             </span>
         </button>
     </h2>
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
-    <br/>
-    <div class="alert alert-warning" *ngIf="beds?.length === 0">
+    <br />
+    <div class="alert alert-warning" *ngIf="filtredbeds?.length === 0">
         <span>No beds found</span>
     </div>
-    <div class="table-responsive" *ngIf="beds?.length > 0">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <label for="Type">Reception structure</label>
+                <select class="form-control form-control-lg form-control-a" [(ngModel)]="hospitalfilter" (change)="FilterByHospital()">
+                    <option [value]="'any'">Any</option>
+                    <option *ngFor="let hospital of hospitals ;trackBy: trackId" [value]="hospital.name">{{hospital.name}}</option>
+                </select> </div>
+            <div class="col-sm">
+                <label for="Type">Availability status</label>
+                <select class="form-control form-control-lg form-control-a" [(ngModel)]="statusfilter" (change)="FilterByStatus()">
+                    <option [value]="'any'">Any</option>
+                    <option [value]="'AVAILABLE'">AVAILABLE</option>
+                    <option [value]="'RESERVED'">RESERVED</option>
+                    <option [value]="'OCCUPIED'">OCCUPIED</option>
+                    <option [value]="'OUTOFORDER'">OUTOFORDER</option>
+                </select> </div>
+            <div class="col-sm">
+                <label for="Type">Reference doctor</label>
+                <select class="form-control form-control-lg form-control-a">
+                    <option [value]="'any'">Any</option>
+                    <option [value]="">DR 1</option>
+                    <option [value]="">DR 2</option>
+                </select> </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="table-responsive" *ngIf="filtredbeds?.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="hospital"><span>Hospital</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col" jhiSortBy="id"><span>ID</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="status"><span>Status</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="hospital"><span>Hospital</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let bed of beds ;trackBy: trackId">
-                <td><a [routerLink]="['/bed', bed.id, 'view' ]">{{bed.id}}</a></td>
-                <td>{{bed.status}}</td>
-                <td>
-                    <div *ngIf="bed.hospital">
-                        <a [routerLink]="['/hospital', bed.hospital?.id, 'view' ]" >{{bed.hospital?.name}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group">
-                        <button type="submit"
-                                [routerLink]="['/bed', bed.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/bed', bed.id, 'edit']"
+                <tr *ngFor="let bed of filtredbeds ;index as i;trackBy: trackId">
+                    <td><a [routerLink]="['/bed', bed.id, 'view' ]">{{i+1}}</a></td>
+                    <td *ngIf="bed.status=='AVAILABLE'" style="background-color: #05fa88;">{{bed.status}}</td>
+                    <td *ngIf="bed.status=='RESERVED'" style="background-color: #fab905;">{{bed.status}}</td>
+                    <td *ngIf="bed.status=='OCCUPIED'" style="background-color: #d30000e0;">{{bed.status}}</td>
+                    <td *ngIf="bed.status=='OUTOFORDER'" style="background-color: #0a74fd;">{{bed.status}}</td>
+                    <td>
+                        <div *ngIf="bed.hospital">
+                            <a [routerLink]="['/hospital', bed.hospital?.id, 'view' ]">{{bed.hospital?.name}}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit" [routerLink]="['/bed', bed.id, 'view' ]" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/bed', bed.id, 'edit']"
                                 class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit" (click)="delete(bed)"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit" (click)="delete(bed)" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-    <div *ngIf="beds?.length > 0">
+    <div *ngIf="filtredbeds?.length > 0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
         </div>
     </div>
 </div>
