@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 import { IHospital, Hospital } from 'app/shared/model/hospital.model';
 import { HospitalService } from './hospital.service';
-import { IAddress } from 'app/shared/model/address.model';
+import { IAddress, Address } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address/address.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
@@ -26,11 +26,24 @@ export class HospitalUpdateComponent implements OnInit {
 
   users: IUser[] = [];
 
+  //  To hide add address form
+  addedaddress = false;
+
+  newstreetname: string | undefined;
+
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
     address: [null, Validators.required],
     headOfSearvice: []
+  });
+
+  addaddressform = this.fb.group({
+    id: [],
+    streetName: [null, [Validators.required]],
+    city: [null, [Validators.required]],
+    region: [],
+    postalCode: []
   });
 
   constructor(
@@ -80,6 +93,10 @@ export class HospitalUpdateComponent implements OnInit {
     });
   }
 
+  getalladresses(): void {
+    this.addressService.query().subscribe((res: HttpResponse<IAddress[]>) => (this.addresses = res.body ? res.body : []));
+  }
+
   updateForm(hospital: IHospital): void {
     this.editForm.patchValue({
       id: hospital.id,
@@ -103,6 +120,24 @@ export class HospitalUpdateComponent implements OnInit {
     }
   }
 
+  saveadress(): void {
+    this.isSaving = true;
+    const address = this.createFromAddr();
+    this.subscribeToSaveAddr(this.addressService.create(address));
+  }
+
+  private createFromAddr(): IAddress {
+    this.newstreetname = this.addaddressform.get(['streetName'])!.value;
+    return {
+      ...new Address(),
+      id: this.addaddressform.get(['id'])!.value,
+      streetName: this.addaddressform.get(['streetName'])!.value,
+      city: this.addaddressform.get(['city'])!.value,
+      region: this.addaddressform.get(['region'])!.value,
+      postalCode: this.addaddressform.get(['postalCode'])!.value
+    };
+  }
+
   private createFromForm(): IHospital {
     return {
       ...new Hospital(),
@@ -116,6 +151,18 @@ export class HospitalUpdateComponent implements OnInit {
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IHospital>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
+      () => this.onSaveError()
+    );
+  }
+
+  protected subscribeToSaveAddr(result: Observable<HttpResponse<IAddress>>): void {
+    result.subscribe(
+      () => {
+        this.isSaving = false;
+        this.addedaddress = !this.addedaddress;
+        this.getalladresses();
+        this.editForm.controls['address'].setValue(this.newstreetname);
+      },
       () => this.onSaveError()
     );
   }
