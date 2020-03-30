@@ -13,6 +13,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { NavbarModule } from 'app/layouts/navbar/navbar.module';
+import { PagesModule } from 'app/pages/pages.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { NavbarModule } from 'app/layouts/navbar/navbar.module';
     CovidHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     CovidEntityModule,
+    PagesModule,
     CovidAppRoutingModule,
     NavbarModule
   ],
