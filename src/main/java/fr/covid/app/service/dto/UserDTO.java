@@ -3,6 +3,7 @@ package fr.covid.app.service.dto;
 import fr.covid.app.config.Constants;
 
 import fr.covid.app.domain.Authority;
+import fr.covid.app.domain.Profile;
 import fr.covid.app.domain.User;
 
 import javax.validation.constraints.*;
@@ -35,6 +36,8 @@ public class UserDTO {
     @Size(max = 256)
     private String imageUrl;
 
+    private Profile profile;
+
     private boolean activated = false;
 
     @Size(min = 2, max = 10)
@@ -62,6 +65,7 @@ public class UserDTO {
         this.email = user.getEmail();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
+        this.profile = user.getProfile();
         this.langKey = user.getLangKey();
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
@@ -119,6 +123,10 @@ public class UserDTO {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public Profile getProfile() { return profile; }
+
+    public void setProfile(Profile profile) { this.profile = profile; }
 
     public boolean isActivated() {
         return activated;

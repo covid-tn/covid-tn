@@ -63,6 +63,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("image_url")
     private String imageUrl;
 
+    @Field("profile")
+    private Profile profile;
+
     @Size(max = 20)
     @Field("activation_key")
     @JsonIgnore
@@ -135,6 +138,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public Profile getProfile() { return profile; }
+
+    public void setProfile(Profile profile) { this.profile = profile; }
 
     public boolean getActivated() {
         return activated;
