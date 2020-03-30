@@ -10,6 +10,7 @@ import { Account } from 'app/core/user/account.model';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 import { MockRouter } from '../../../helpers/mock-route.service';
 import { MockStateStorageService } from '../../../helpers/mock-state-storage.service';
+import { Profile } from 'app/shared/model/profile.model';
 
 function accountWithAuthorities(authorities: string[]): Account {
   return {
@@ -20,7 +21,8 @@ function accountWithAuthorities(authorities: string[]): Account {
     langKey: '',
     lastName: '',
     login: '',
-    imageUrl: ''
+    imageUrl: '',
+    profile: new Profile()
   };
 }
 

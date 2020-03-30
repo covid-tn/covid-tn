@@ -13,10 +13,6 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./address/address.module').then(m => m.CovidAddressModule)
       },
       {
-        path: 'profile',
-        loadChildren: () => import('./profile/profile.module').then(m => m.CovidProfileModule)
-      },
-      {
         path: 'bed',
         loadChildren: () => import('./bed/bed.module').then(m => m.CovidBedModule)
       },
