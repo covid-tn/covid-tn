@@ -28,6 +28,7 @@ public interface BedService {
      */
     Page<Bed> findAll(Pageable pageable);
 
+    Page<Bed> findByHospital(Pageable pageable, String hospitalId);
 
     /**
      * Get the "id" bed.

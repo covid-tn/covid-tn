@@ -50,6 +50,11 @@ public class BedServiceImpl implements BedService {
         return bedRepository.findAll(pageable);
     }
 
+    @Override
+    public Page<Bed> findByHospital(Pageable pageable, String hospitalId) {
+        log.debug("Request to get all Beds of Hospital : {}", hospitalId);
+        return bedRepository.findByHospital(pageable, hospitalId);
+    }
 
     /**
      * Get one bed by id.
