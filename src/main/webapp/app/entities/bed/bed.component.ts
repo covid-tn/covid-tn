@@ -137,7 +137,7 @@ export class BedComponent implements OnInit, OnDestroy {
   }
 
   //  To Filter Beds By Status
-  protected FilterByStatus(): void {
+  FilterByStatus(): void {
     //  Filter
     if (this.statusfilter === 'any') {
       this.filtredbedsbystatus = this.beds;
@@ -155,7 +155,7 @@ export class BedComponent implements OnInit, OnDestroy {
   }
 
   //  To Filter Beds By Hospital
-  protected FilterByHospital(): void {
+  FilterByHospital(): void {
     //  Filter
     if (this.hospitalfilter === 'any') {
       this.filtredbeds = this.filtredbedsbystatus;
