@@ -9,10 +9,10 @@ import { CovidHomeModule } from './home/home.module';
 import { CovidEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { MainComponent } from './layouts/main/main.component';
-import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
+import { NavbarModule } from 'app/layouts/navbar/navbar.module';
 
 @NgModule({
   imports: [
@@ -22,9 +22,10 @@ import { ErrorComponent } from './layouts/error/error.component';
     CovidHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     CovidEntityModule,
-    CovidAppRoutingModule
+    CovidAppRoutingModule,
+    NavbarModule
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+  declarations: [MainComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   bootstrap: [MainComponent]
 })
 export class CovidAppModule {}
