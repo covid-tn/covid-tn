@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http';
 
 import { User } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { IHospital } from 'app/shared/model/hospital.model';
+import { HospitalService } from 'app/entities/hospital/hospital.service';
 
 @Component({
   selector: 'jhi-user-mgmt-update',
@@ -13,6 +17,7 @@ export class UserManagementUpdateComponent implements OnInit {
   user!: User;
   authorities: string[] = [];
   isSaving = false;
+  hospitals: IHospital[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -22,10 +27,19 @@ export class UserManagementUpdateComponent implements OnInit {
     email: ['', [Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     activated: [],
     langKey: [],
-    authorities: []
+    authorities: [],
+    profile: new FormGroup({
+      pin: new FormControl(''),
+      hospital: new FormControl(undefined, Validators.required)
+    })
   });
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    protected hospitalService: HospitalService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(({ user }) => {
@@ -37,6 +51,16 @@ export class UserManagementUpdateComponent implements OnInit {
         this.updateForm(user);
       }
     });
+
+    this.hospitalService
+      .query()
+      .pipe(
+        map((res: HttpResponse<IHospital[]>) => {
+          return res.body ? res.body : [];
+        })
+      )
+      .subscribe((resBody: IHospital[]) => (this.hospitals = resBody));
+
     this.userService.authorities().subscribe(authorities => {
       this.authorities = authorities;
     });
@@ -72,7 +96,8 @@ export class UserManagementUpdateComponent implements OnInit {
       email: user.email,
       activated: user.activated,
       langKey: user.langKey,
-      authorities: user.authorities
+      authorities: user.authorities,
+      profile: user.profile
     });
   }
 
@@ -84,6 +109,7 @@ export class UserManagementUpdateComponent implements OnInit {
     user.activated = this.editForm.get(['activated'])!.value;
     user.langKey = this.editForm.get(['langKey'])!.value;
     user.authorities = this.editForm.get(['authorities'])!.value;
+    user.profile = this.editForm.get(['profile'])!.value;
   }
 
   private onSaveSuccess(): void {

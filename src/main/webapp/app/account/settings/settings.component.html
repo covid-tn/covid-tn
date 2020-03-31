@@ -49,6 +49,10 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group" *ngIf="account.profile && account.profile.hospital">
+                    <label class="form-control-label" for="hospital">Hospital</label>
+                    <input type="text" class="form-control" id="hospital" name="hospital" [value]="account.profile.hospital.name" disabled>
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Your email"

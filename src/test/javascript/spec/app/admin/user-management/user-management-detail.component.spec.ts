@@ -5,13 +5,14 @@ import { of } from 'rxjs';
 import { CovidTestModule } from '../../../test.module';
 import { UserManagementDetailComponent } from 'app/admin/user-management/user-management-detail.component';
 import { User } from 'app/core/user/user.model';
+import { Profile } from 'app/shared/model/profile.model';
 
 describe('Component Tests', () => {
   describe('User Management Detail Component', () => {
     let comp: UserManagementDetailComponent;
     let fixture: ComponentFixture<UserManagementDetailComponent>;
     const route: ActivatedRoute = ({
-      data: of({ user: new User(1, 'user', 'first', 'last', 'first@last.com', true, 'en', ['ROLE_USER'], 'admin') })
+      data: of({ user: new User(1, 'user', 'first', 'last', 'first@last.com', true, 'en', ['ROLE_USER'], new Profile()) })
     } as any) as ActivatedRoute;
 
     beforeEach(async(() => {

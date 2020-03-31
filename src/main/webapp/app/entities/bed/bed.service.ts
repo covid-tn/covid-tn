@@ -32,6 +32,11 @@ export class BedService {
     return this.http.get<IBed[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryByHospital(req?: any, hospitalId?: string): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IBed[]>(`${this.resourceUrl}ByHospital/${hospitalId}`, { params: options, observe: 'response' });
+  }
+
   delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

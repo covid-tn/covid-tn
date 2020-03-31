@@ -6,6 +6,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { IHospital } from 'app/shared/model/hospital.model';
 
 @Component({
   selector: 'jhi-navbar',
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
   swaggerEnabled?: boolean;
   version: string;
+  attachedHospital: IHospital | undefined = undefined;
 
   constructor(
     private loginService: LoginService,
@@ -32,6 +34,13 @@ export class NavbarComponent implements OnInit {
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
       this.swaggerEnabled = profileInfo.swaggerEnabled;
+    });
+    this.accountService.getAuthenticationState().subscribe(account => {
+      if (account && account.profile && account.profile.hospital) {
+        this.attachedHospital = account.profile.hospital;
+      } else {
+        this.attachedHospital = undefined;
+      }
     });
   }
 

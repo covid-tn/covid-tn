@@ -100,6 +100,14 @@ public class BedResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/bedsByHospital/{hospitalId}")
+    public ResponseEntity<List<Bed>> getBedsByHospital(@PathVariable String hospitalId, Pageable pageable) {
+        log.debug("REST request to get a page of Beds by hospital : {}", hospitalId);
+        Page<Bed> page = bedService.findByHospital(pageable, hospitalId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
     /**
      * {@code GET  /beds/:id} : get the "id" bed.
      *

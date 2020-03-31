@@ -8,6 +8,7 @@ import { UserService } from 'app/core/user/user.service';
 import { UserManagementComponent } from './user-management.component';
 import { UserManagementDetailComponent } from './user-management-detail.component';
 import { UserManagementUpdateComponent } from './user-management-update.component';
+import { Profile } from 'app/shared/model/profile.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserManagementResolve implements Resolve<IUser> {
@@ -18,7 +19,9 @@ export class UserManagementResolve implements Resolve<IUser> {
     if (id) {
       return this.service.find(id);
     }
-    return of(new User());
+    const user = new User();
+    user.profile = new Profile();
+    return of(user);
   }
 }
 

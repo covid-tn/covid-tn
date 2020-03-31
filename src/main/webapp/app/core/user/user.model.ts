@@ -1,3 +1,5 @@
+import { Profile } from 'app/shared/model/profile.model';
+
 export interface IUser {
   id?: any;
   login?: string;
@@ -7,6 +9,7 @@ export interface IUser {
   activated?: boolean;
   langKey?: string;
   authorities?: string[];
+  profile?: Profile;
   createdBy?: string;
   createdDate?: Date;
   lastModifiedBy?: string;
@@ -24,6 +27,7 @@ export class User implements IUser {
     public activated?: boolean,
     public langKey?: string,
     public authorities?: string[],
+    public profile?: Profile,
     public createdBy?: string,
     public createdDate?: Date,
     public lastModifiedBy?: string,

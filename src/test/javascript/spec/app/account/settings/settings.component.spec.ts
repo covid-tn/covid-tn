@@ -7,6 +7,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { SettingsComponent } from 'app/account/settings/settings.component';
 import { MockAccountService } from '../../../helpers/mock-account.service';
+import { Profile } from 'app/shared/model/profile.model';
 
 describe('Component Tests', () => {
   describe('SettingsComponent', () => {
@@ -21,7 +22,8 @@ describe('Component Tests', () => {
       langKey: 'en',
       login: 'john',
       authorities: [],
-      imageUrl: ''
+      imageUrl: '',
+      profile: new Profile()
     };
 
     beforeEach(async(() => {

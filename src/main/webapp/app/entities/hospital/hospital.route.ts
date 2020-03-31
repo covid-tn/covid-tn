@@ -55,7 +55,7 @@ export const hospitalRoute: Routes = [
       hospital: HospitalResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_USER', 'ROLE_HEAD_OF_SERVICE'],
       pageTitle: 'Hospitals'
     },
     canActivate: [UserRouteAccessService]
