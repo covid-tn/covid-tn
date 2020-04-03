@@ -4,10 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 
-import { User } from 'app/core/user/user.model';
+import { IUser, User } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { IHospital } from 'app/shared/model/hospital.model';
 import { HospitalService } from 'app/entities/hospital/hospital.service';
+
+type SelectableEntity = IUser | IHospital;
 
 @Component({
   selector: 'jhi-user-mgmt-update',
@@ -119,5 +121,9 @@ export class UserManagementUpdateComponent implements OnInit {
 
   private onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }
