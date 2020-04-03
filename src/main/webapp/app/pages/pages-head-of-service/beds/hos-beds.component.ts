@@ -123,7 +123,7 @@ export class HosBedsComponent implements OnInit, OnDestroy {
   }
 
   //  To Filter Beds By Status
-  protected FilterByStatus(): void {
+  FilterByStatus(): void {
     //  Filter
     if (this.statusfilter === 'any') {
       this.filtredbedsbystatus = this.beds;
