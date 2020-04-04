@@ -19,6 +19,15 @@
                         <a [routerLink]="['/service-hospital', serviceRoom.serviceHospital?.id, 'view']">{{serviceRoom.serviceHospital?.id}}</a>
                     </div>
                 </dd>
+                <dt><span>Lits</span></dt>
+                <dd>
+                    <ul *ngFor="let bed of serviceRoom.beds">
+                        <li>
+                            <a [routerLink]="['/bed', bed.id, 'view']">{{bed.id}}</a>
+                            : {{bed.status}}
+                        </li>
+                    </ul>
+                </dd>
             </dl>
 
             <button type="submit"
