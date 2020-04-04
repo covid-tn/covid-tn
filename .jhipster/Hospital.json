@@ -32,6 +32,12 @@
             "otherEntityName": "bed",
             "otherEntityRelationshipName": "hospital",
             "relationshipName": "bed"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "serviceHospital",
+            "otherEntityRelationshipName": "hospital",
+            "relationshipName": "service"
         }
     ],
     "changelogDate": "20200323223006",

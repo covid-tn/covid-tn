@@ -36,6 +36,10 @@ public class Hospital implements Serializable {
     @Field("bed")
     private Set<Bed> beds = new HashSet<>();
 
+    @DBRef
+    @Field("service")
+    private Set<ServiceHospital> services = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -107,6 +111,31 @@ public class Hospital implements Serializable {
 
     public void setBeds(Set<Bed> beds) {
         this.beds = beds;
+    }
+
+    public Set<ServiceHospital> getServices() {
+        return services;
+    }
+
+    public Hospital services(Set<ServiceHospital> serviceHospitals) {
+        this.services = serviceHospitals;
+        return this;
+    }
+
+    public Hospital addService(ServiceHospital serviceHospital) {
+        this.services.add(serviceHospital);
+        serviceHospital.setHospital(this);
+        return this;
+    }
+
+    public Hospital removeService(ServiceHospital serviceHospital) {
+        this.services.remove(serviceHospital);
+        serviceHospital.setHospital(null);
+        return this;
+    }
+
+    public void setServices(Set<ServiceHospital> serviceHospitals) {
+        this.services = serviceHospitals;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

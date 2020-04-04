@@ -2,6 +2,11 @@ entity Hospital {
 	name String required,
 }
 
+entity ServiceHospital {
+	name String required,
+    description String,
+}
+
 entity Address {
 	streetName String required,
     city String required,
@@ -35,7 +40,8 @@ relationship OneToOne{
 }
 
 relationship OneToMany {
-	Hospital{bed} to Bed{Hospital(name)}
+	Hospital{bed} to Bed{Hospital(name)},
+    Hospital{service} to ServiceHospital{hospital}
 }
 
 relationship ManyToOne {

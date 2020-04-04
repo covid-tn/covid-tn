@@ -42,7 +42,12 @@
                         <span>Bed Status History</span>
                     </a>
                 </li>
-                <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                <li>
+                    <a class="dropdown-item" routerLink="service-hospital" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                        <span>Hospital Services</span>
+                    </a>
+                </li>
             </ul>
         </li>
         <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">

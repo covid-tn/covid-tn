@@ -1,6 +1,7 @@
 import { IAddress } from 'app/shared/model/address.model';
 import { IUser } from 'app/core/user/user.model';
 import { IBed } from 'app/shared/model/bed.model';
+import { IServiceHospital } from 'app/shared/model/service-hospital.model';
 
 export interface IHospital {
   id?: string;
@@ -8,8 +9,16 @@ export interface IHospital {
   address?: IAddress;
   headOfSearvice?: IUser;
   beds?: IBed[];
+  services?: IServiceHospital[];
 }
 
 export class Hospital implements IHospital {
-  constructor(public id?: string, public name?: string, public address?: IAddress, public headOfSearvice?: IUser, public beds?: IBed[]) {}
+  constructor(
+    public id?: string,
+    public name?: string,
+    public address?: IAddress,
+    public headOfSearvice?: IUser,
+    public beds?: IBed[],
+    public services?: IServiceHospital[]
+  ) {}
 }
