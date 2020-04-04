@@ -2,6 +2,7 @@ package fr.covid.app.service;
 
 import fr.covid.app.domain.ServiceHospital;
 
+import fr.covid.app.domain.ServiceRoom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -37,10 +38,14 @@ public interface ServiceHospitalService {
      */
     Optional<ServiceHospital> findOne(String id);
 
+    void addRoomToService(String serviceId, ServiceRoom room);
+
     /**
      * Delete the "id" serviceHospital.
      *
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    void removeRoomFromService(ServiceRoom serviceRoom);
 }

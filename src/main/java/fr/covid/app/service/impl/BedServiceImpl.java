@@ -3,6 +3,7 @@ package fr.covid.app.service.impl;
 import fr.covid.app.service.BedService;
 import fr.covid.app.domain.Bed;
 import fr.covid.app.repository.BedRepository;
+import fr.covid.app.service.ServiceRoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,9 +23,9 @@ public class BedServiceImpl implements BedService {
 
     private final BedRepository bedRepository;
 
-    private final ServiceRoomServiceImpl roomService;
+    private final ServiceRoomService roomService;
 
-    public BedServiceImpl(BedRepository bedRepository, ServiceRoomServiceImpl roomService) {
+    public BedServiceImpl(BedRepository bedRepository, ServiceRoomService roomService) {
         this.bedRepository = bedRepository;
         this.roomService = roomService;
     }

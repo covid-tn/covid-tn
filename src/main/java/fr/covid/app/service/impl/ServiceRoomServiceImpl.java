@@ -1,5 +1,6 @@
 package fr.covid.app.service.impl;
 
+import fr.covid.app.service.ServiceHospitalService;
 import fr.covid.app.service.ServiceRoomService;
 import fr.covid.app.domain.ServiceRoom;
 import fr.covid.app.repository.ServiceRoomRepository;
@@ -22,8 +23,11 @@ public class ServiceRoomServiceImpl implements ServiceRoomService {
 
     private final ServiceRoomRepository serviceRoomRepository;
 
-    public ServiceRoomServiceImpl(ServiceRoomRepository serviceRoomRepository) {
+    private final ServiceHospitalService serviceHospitalService;
+
+    public ServiceRoomServiceImpl(ServiceRoomRepository serviceRoomRepository, ServiceHospitalService serviceHospitalService) {
         this.serviceRoomRepository = serviceRoomRepository;
+        this.serviceHospitalService = serviceHospitalService;
     }
 
     /**
@@ -35,7 +39,11 @@ public class ServiceRoomServiceImpl implements ServiceRoomService {
     @Override
     public ServiceRoom save(ServiceRoom serviceRoom) {
         log.debug("Request to save ServiceRoom : {}", serviceRoom);
-        return serviceRoomRepository.save(serviceRoom);
+        ServiceRoom result = serviceRoomRepository.save(serviceRoom);
+        if (result.getServiceHospital() != null) {
+            serviceHospitalService.addRoomToService(result.getServiceHospital().getId(), serviceRoom);
+        }
+        return result;
     }
 
     /**
@@ -71,6 +79,7 @@ public class ServiceRoomServiceImpl implements ServiceRoomService {
     @Override
     public void delete(String id) {
         log.debug("Request to delete ServiceRoom : {}", id);
+        serviceRoomRepository.findById(id).ifPresent(serviceHospitalService::removeRoomFromService);
         serviceRoomRepository.deleteById(id);
     }
 }

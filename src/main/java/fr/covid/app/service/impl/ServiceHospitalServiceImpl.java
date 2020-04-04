@@ -1,5 +1,6 @@
 package fr.covid.app.service.impl;
 
+import fr.covid.app.domain.ServiceRoom;
 import fr.covid.app.service.ServiceHospitalService;
 import fr.covid.app.domain.ServiceHospital;
 import fr.covid.app.repository.ServiceHospitalRepository;
@@ -63,6 +64,17 @@ public class ServiceHospitalServiceImpl implements ServiceHospitalService {
         return serviceHospitalRepository.findById(id);
     }
 
+    @Override
+    public void addRoomToService(String serviceId, ServiceRoom room) {
+        log.debug("Add Room {} to HospitalService : {}", room, serviceId);
+        findOne(serviceId).ifPresent(
+            serviceHospital -> {
+                serviceHospital.addRoom(room);
+                save(serviceHospital);
+            }
+        );
+    }
+
     /**
      * Delete the serviceHospital by id.
      *
@@ -72,5 +84,14 @@ public class ServiceHospitalServiceImpl implements ServiceHospitalService {
     public void delete(String id) {
         log.debug("Request to delete ServiceHospital : {}", id);
         serviceHospitalRepository.deleteById(id);
+    }
+
+    @Override
+    public  void removeRoomFromService(ServiceRoom serviceRoom) {
+        log.debug("Remove Room {} from Service {}",serviceRoom, serviceRoom.getServiceHospital());
+        findOne(serviceRoom.getServiceHospital().getId()).ifPresent(serviceHospital -> {
+            serviceHospital.removeRoom(serviceRoom);
+            save(serviceHospital);
+        });
     }
 }
