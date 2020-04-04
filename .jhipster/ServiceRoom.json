@@ -1,5 +1,5 @@
 {
-    "name": "ServiceHospital",
+    "name": "ServiceRoom",
     "fields": [
         {
             "fieldName": "name",
@@ -15,21 +15,15 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "serviceRoom",
-            "otherEntityRelationshipName": "serviceHospital",
-            "relationshipName": "room"
-        },
-        {
             "relationshipType": "many-to-one",
-            "otherEntityName": "hospital",
-            "otherEntityRelationshipName": "service",
-            "relationshipName": "hospital",
+            "otherEntityName": "serviceHospital",
+            "otherEntityRelationshipName": "room",
+            "relationshipName": "serviceHospital",
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200404125538",
-    "entityTableName": "service_hospital",
+    "changelogDate": "20200404144330",
+    "entityTableName": "service_room",
     "dto": "no",
     "pagination": "pagination",
     "service": "serviceImpl",

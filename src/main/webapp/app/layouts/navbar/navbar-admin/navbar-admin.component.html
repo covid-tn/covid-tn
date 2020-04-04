@@ -48,6 +48,12 @@
                         <span>Hospital Services</span>
                     </a>
                 </li>
+                <li>
+                    <a class="dropdown-item" routerLink="service-room" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                        <span>Service Room</span>
+                    </a>
+                </li>
             </ul>
         </li>
         <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">

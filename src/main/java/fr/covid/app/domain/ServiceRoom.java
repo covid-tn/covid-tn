@@ -7,14 +7,12 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
- * A ServiceHospital.
+ * A ServiceRoom.
  */
-@Document(collection = "service_hospital")
-public class ServiceHospital implements Serializable {
+@Document(collection = "service_room")
+public class ServiceRoom implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,13 +27,9 @@ public class ServiceHospital implements Serializable {
     private String description;
 
     @DBRef
-    @Field("room")
-    private Set<ServiceRoom> rooms = new HashSet<>();
-
-    @DBRef
-    @Field("hospital")
-    @JsonIgnoreProperties("services")
-    private Hospital hospital;
+    @Field("serviceHospital")
+    @JsonIgnoreProperties("rooms")
+    private ServiceHospital serviceHospital;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -50,7 +44,7 @@ public class ServiceHospital implements Serializable {
         return name;
     }
 
-    public ServiceHospital name(String name) {
+    public ServiceRoom name(String name) {
         this.name = name;
         return this;
     }
@@ -63,7 +57,7 @@ public class ServiceHospital implements Serializable {
         return description;
     }
 
-    public ServiceHospital description(String description) {
+    public ServiceRoom description(String description) {
         this.description = description;
         return this;
     }
@@ -72,42 +66,17 @@ public class ServiceHospital implements Serializable {
         this.description = description;
     }
 
-    public Set<ServiceRoom> getRooms() {
-        return rooms;
+    public ServiceHospital getServiceHospital() {
+        return serviceHospital;
     }
 
-    public ServiceHospital rooms(Set<ServiceRoom> serviceRooms) {
-        this.rooms = serviceRooms;
+    public ServiceRoom serviceHospital(ServiceHospital serviceHospital) {
+        this.serviceHospital = serviceHospital;
         return this;
     }
 
-    public ServiceHospital addRoom(ServiceRoom serviceRoom) {
-        this.rooms.add(serviceRoom);
-        serviceRoom.setServiceHospital(this);
-        return this;
-    }
-
-    public ServiceHospital removeRoom(ServiceRoom serviceRoom) {
-        this.rooms.remove(serviceRoom);
-        serviceRoom.setServiceHospital(null);
-        return this;
-    }
-
-    public void setRooms(Set<ServiceRoom> serviceRooms) {
-        this.rooms = serviceRooms;
-    }
-
-    public Hospital getHospital() {
-        return hospital;
-    }
-
-    public ServiceHospital hospital(Hospital hospital) {
-        this.hospital = hospital;
-        return this;
-    }
-
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setServiceHospital(ServiceHospital serviceHospital) {
+        this.serviceHospital = serviceHospital;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -116,10 +85,10 @@ public class ServiceHospital implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ServiceHospital)) {
+        if (!(o instanceof ServiceRoom)) {
             return false;
         }
-        return id != null && id.equals(((ServiceHospital) o).id);
+        return id != null && id.equals(((ServiceRoom) o).id);
     }
 
     @Override
@@ -129,7 +98,7 @@ public class ServiceHospital implements Serializable {
 
     @Override
     public String toString() {
-        return "ServiceHospital{" +
+        return "ServiceRoom{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
