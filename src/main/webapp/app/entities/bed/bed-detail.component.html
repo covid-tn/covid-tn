@@ -15,6 +15,12 @@
                         <a [routerLink]="['/hospital', bed.hospital?.id, 'view']">{{bed.hospital?.name}}</a>
                     </div>
                 </dd>
+                <dt><span>Room</span></dt>
+                <dd>
+                    <div *ngIf="bed.room">
+                        <a [routerLink]="['/service-room', bed.room?.id, 'view']">{{bed.room?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

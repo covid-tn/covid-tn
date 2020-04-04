@@ -10,6 +10,10 @@ import { IBed, Bed } from 'app/shared/model/bed.model';
 import { BedService } from './bed.service';
 import { IHospital } from 'app/shared/model/hospital.model';
 import { HospitalService } from 'app/entities/hospital/hospital.service';
+import { IServiceRoom } from 'app/shared/model/service-room.model';
+import { ServiceRoomService } from 'app/entities/service-room/service-room.service';
+
+type SelectableEntity = IHospital | IServiceRoom;
 
 @Component({
   selector: 'jhi-bed-update',
@@ -20,15 +24,19 @@ export class BedUpdateComponent implements OnInit {
 
   hospitals: IHospital[] = [];
 
+  servicerooms: IServiceRoom[] = [];
+
   editForm = this.fb.group({
     id: [],
     status: [],
-    hospital: []
+    hospital: [],
+    room: []
   });
 
   constructor(
     protected bedService: BedService,
     protected hospitalService: HospitalService,
+    protected serviceRoomService: ServiceRoomService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -45,6 +53,15 @@ export class BedUpdateComponent implements OnInit {
           })
         )
         .subscribe((resBody: IHospital[]) => (this.hospitals = resBody));
+
+      this.serviceRoomService
+        .query()
+        .pipe(
+          map((res: HttpResponse<IServiceRoom[]>) => {
+            return res.body ? res.body : [];
+          })
+        )
+        .subscribe((resBody: IServiceRoom[]) => (this.servicerooms = resBody));
     });
   }
 
@@ -52,7 +69,8 @@ export class BedUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: bed.id,
       status: bed.status,
-      hospital: bed.hospital
+      hospital: bed.hospital,
+      room: bed.room
     });
   }
 
@@ -75,7 +93,8 @@ export class BedUpdateComponent implements OnInit {
       ...new Bed(),
       id: this.editForm.get(['id'])!.value,
       status: this.editForm.get(['status'])!.value,
-      hospital: this.editForm.get(['hospital'])!.value
+      hospital: this.editForm.get(['hospital'])!.value,
+      room: this.editForm.get(['room'])!.value
     };
   }
 
@@ -95,7 +114,7 @@ export class BedUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IHospital): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

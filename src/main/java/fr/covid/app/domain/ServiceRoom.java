@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A ServiceRoom.
@@ -25,6 +27,10 @@ public class ServiceRoom implements Serializable {
 
     @Field("description")
     private String description;
+
+    @DBRef
+    @Field("bed")
+    private Set<Bed> beds = new HashSet<>();
 
     @DBRef
     @Field("serviceHospital")
@@ -64,6 +70,31 @@ public class ServiceRoom implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Bed> getBeds() {
+        return beds;
+    }
+
+    public ServiceRoom beds(Set<Bed> beds) {
+        this.beds = beds;
+        return this;
+    }
+
+    public ServiceRoom addBed(Bed bed) {
+        this.beds.add(bed);
+        bed.setRoom(this);
+        return this;
+    }
+
+    public ServiceRoom removeBed(Bed bed) {
+        this.beds.remove(bed);
+        bed.setRoom(null);
+        return this;
+    }
+
+    public void setBeds(Set<Bed> beds) {
+        this.beds = beds;
     }
 
     public ServiceHospital getServiceHospital() {

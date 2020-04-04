@@ -26,6 +26,13 @@
                         <option [ngValue]="hospitalOption.id === editForm.get('hospital')!.value?.id ? editForm.get('hospital')!.value : hospitalOption" *ngFor="let hospitalOption of hospitals; trackBy: trackById">{{hospitalOption.name}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_room">Room</label>
+                    <select class="form-control" id="field_room" name="room" formControlName="room">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="serviceRoomOption.id === editForm.get('room')!.value?.id ? editForm.get('room')!.value : serviceRoomOption" *ngFor="let serviceRoomOption of servicerooms; trackBy: trackById">{{serviceRoomOption.name}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

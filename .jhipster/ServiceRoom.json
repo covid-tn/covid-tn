@@ -15,6 +15,12 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "bed",
+            "otherEntityRelationshipName": "room",
+            "relationshipName": "bed"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "serviceHospital",
             "otherEntityRelationshipName": "room",

@@ -28,6 +28,11 @@ public class Bed implements Serializable {
     @JsonIgnoreProperties("beds")
     private Hospital hospital;
 
+    @DBRef
+    @Field("room")
+    @JsonIgnoreProperties("beds")
+    private ServiceRoom room;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -61,6 +66,19 @@ public class Bed implements Serializable {
 
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
+    }
+
+    public ServiceRoom getRoom() {
+        return room;
+    }
+
+    public Bed room(ServiceRoom serviceRoom) {
+        this.room = serviceRoom;
+        return this;
+    }
+
+    public void setRoom(ServiceRoom serviceRoom) {
+        this.room = serviceRoom;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

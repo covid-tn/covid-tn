@@ -11,7 +11,7 @@
     </h2>
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
-    <br />
+    <br/>
     <div class="alert alert-warning" *ngIf="filtredbeds?.length === 0">
         <span>No beds found</span>
     </div>
@@ -47,18 +47,13 @@
     <div class="table-responsive" *ngIf="filtredbeds?.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col" jhiSortBy="id"><span>ID</span>
-                        <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="status"><span>Status</span>
-                        <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="hospital"><span>Hospital</span>
-                        <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
-                    <th scope="col"></th>
-                </tr>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="hospital"><span>Hospital</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="room.id"><span>Room</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let bed of filtredbeds ;index as i;trackBy: trackId">
@@ -70,6 +65,11 @@
                     <td>
                         <div *ngIf="bed.hospital">
                             <a [routerLink]="['/hospital', bed.hospital?.id, 'view' ]">{{bed.hospital?.name}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="bed.room">
+                            <a [routerLink]="['/service-room', bed.room?.id, 'view' ]" >{{bed.room?.name}}</a>
                         </div>
                     </td>
                     <td class="text-right">

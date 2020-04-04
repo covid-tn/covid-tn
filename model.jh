@@ -47,7 +47,8 @@ relationship OneToOne{
 relationship OneToMany {
 	Hospital{bed} to Bed{Hospital(name)},
     Hospital{service} to ServiceHospital{hospital},
-    ServiceHospital{room} to ServiceRoom{serviceHospital}
+    ServiceHospital{room} to ServiceRoom{serviceHospital},
+    ServiceRoom{bed} to Bed{room},
 }
 
 relationship ManyToOne {
