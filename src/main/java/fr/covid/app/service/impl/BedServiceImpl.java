@@ -22,8 +22,11 @@ public class BedServiceImpl implements BedService {
 
     private final BedRepository bedRepository;
 
-    public BedServiceImpl(BedRepository bedRepository) {
+    private final ServiceRoomServiceImpl roomService;
+
+    public BedServiceImpl(BedRepository bedRepository, ServiceRoomServiceImpl roomService) {
         this.bedRepository = bedRepository;
+        this.roomService = roomService;
     }
 
     /**
@@ -35,7 +38,15 @@ public class BedServiceImpl implements BedService {
     @Override
     public Bed save(Bed bed) {
         log.debug("Request to save Bed : {}", bed);
-        return bedRepository.save(bed);
+        Bed result = bedRepository.save(bed);
+        if (result.getId() != null && result.getRoom() != null) {
+            roomService.findOne(result.getRoom().getId()).ifPresent(
+                room -> {
+                    room.addBed(result);
+                    roomService.save(room);
+                });
+        }
+        return result;
     }
 
     /**
@@ -76,6 +87,13 @@ public class BedServiceImpl implements BedService {
     @Override
     public void delete(String id) {
         log.debug("Request to delete Bed : {}", id);
-        bedRepository.deleteById(id);
+        bedRepository.findById(id).ifPresent(bed -> {
+            roomService.findOne(bed.getRoom().getId()).ifPresent(
+                room -> {
+                    room.removeBed(bed);
+                    roomService.save(room);
+                });
+            bedRepository.deleteById(id);
+        });
     }
 }
