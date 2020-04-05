@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <label for="Type">Reception structure</label>
+                <label for="Type">Service</label>
                 <select class="form-control form-control-lg form-control-a" [(ngModel)]="hospitalfilter" (change)="FilterByHospital()">
                     <option [value]="'any'">Any</option>
                     <option *ngFor="let hospital of hospitals ;trackBy: trackId" [value]="hospital.name">{{hospital.name}}</option>
@@ -33,13 +33,13 @@
                     <option [value]="'OCCUPIED'">OCCUPIED</option>
                     <option [value]="'OUTOFORDER'">OUTOFORDER</option>
                 </select> </div>
-            <div class="col-sm">
+          <!--  <div class="col-sm">
                 <label for="Type">Reference doctor</label>
                 <select class="form-control form-control-lg form-control-a">
                     <option [value]="'any'">Any</option>
                     <option [value]="">DR 1</option>
                     <option [value]="">DR 2</option>
-                </select> </div>
+                </select> </div> -->
         </div>
     </div>
     <br>
@@ -54,7 +54,7 @@
                     <th scope="col" jhiSortBy="status"><span>Status</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="hospital"><span>Hospital</span>
+                    <th scope="col" jhiSortBy="hospital"><span>Service</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th scope="col"></th>
