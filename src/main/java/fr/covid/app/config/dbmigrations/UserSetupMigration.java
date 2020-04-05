@@ -48,7 +48,7 @@ public class UserSetupMigration {
         headOfServiceUser.setPassword("$2y$12$bgl4kJ9P6bj4ctIRDBKlIORuVO3MPjwKZa445C86MHdLO6maukPg2");
         headOfServiceUser.setFirstName("head");
         headOfServiceUser.setLastName("head");
-        headOfServiceUser.setEmail("head@head.com");
+        headOfServiceUser.setEmail("covid.tunisia+head@gmail.com");
         headOfServiceUser.setActivated(true);
         headOfServiceUser.setLangKey("en");
         headOfServiceUser.setCreatedBy("system");
@@ -63,7 +63,7 @@ public class UserSetupMigration {
         hospitalAdminUser.setPassword("$2y$12$BdXOpgizpDlpmSk7qcjz6.zRaJv5rJJUklMzf0g3UmeiPdzOtlWgm");
         hospitalAdminUser.setFirstName("hospitalAdmin");
         hospitalAdminUser.setLastName("hospitalAdmin");
-        hospitalAdminUser.setEmail("hospitalAdmin@hospitalAdmin.com");
+        hospitalAdminUser.setEmail("covid.tunisia+hospitalAdmin@gmail.com");
         hospitalAdminUser.setActivated(true);
         hospitalAdminUser.setLangKey("en");
         hospitalAdminUser.setCreatedBy("system");
@@ -78,7 +78,7 @@ public class UserSetupMigration {
         visiteurUser.setPassword("$2y$12$4lYUPopZ8hhyaIGDMNOJd.mKkGIEOvEMGLKAocfHWbtQyIPjnZ/y6");
         visiteurUser.setFirstName("visiteur");
         visiteurUser.setLastName("visiteur");
-        visiteurUser.setEmail("visiteur@visiteur.com");
+        visiteurUser.setEmail("covid.tunisia+visiteur@gmail.com");
         visiteurUser.setActivated(true);
         visiteurUser.setLangKey("en");
         visiteurUser.setCreatedBy("system");
