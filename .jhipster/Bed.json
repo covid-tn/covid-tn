@@ -5,6 +5,10 @@
             "fieldName": "status",
             "fieldType": "BedStatus",
             "fieldValues": "AVAILABLE,RESERVED,OCCUPIED,OUTOFORDER"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -25,5 +29,7 @@
     "fluentMethods": true,
     "readOnly": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "mongodb"
 }

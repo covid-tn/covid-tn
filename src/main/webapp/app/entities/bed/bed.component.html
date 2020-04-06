@@ -54,6 +54,7 @@
                     <th scope="col" jhiSortBy="status"><span>Status</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
+                    <th scope="col"  jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                     <th scope="col" jhiSortBy="hospital"><span>Service</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
@@ -67,6 +68,7 @@
                     <td *ngIf="bed.status=='RESERVED'" style="background-color: #fab905;">{{bed.status}}</td>
                     <td *ngIf="bed.status=='OCCUPIED'" style="background-color: #d30000e0;">{{bed.status}}</td>
                     <td *ngIf="bed.status=='OUTOFORDER'" style="background-color: #0a74fd;">{{bed.status}}</td>
+                    <td>{{bed.name}}</td>
                     <td>
                         <div *ngIf="bed.hospital">
                             <a [routerLink]="['/hospital', bed.hospital?.id, 'view' ]">{{bed.hospital?.name}}</a>

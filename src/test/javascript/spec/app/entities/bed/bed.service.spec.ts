@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(BedService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Bed('ID', BedStatus.AVAILABLE);
+      elemDefault = new Bed('ID', BedStatus.AVAILABLE, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -57,7 +57,8 @@ describe('Service Tests', () => {
       it('should update a Bed', () => {
         const returnedFromService = Object.assign(
           {
-            status: 'BBBBBB'
+            status: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -75,7 +76,8 @@ describe('Service Tests', () => {
       it('should return a list of Bed', () => {
         const returnedFromService = Object.assign(
           {
-            status: 'BBBBBB'
+            status: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );

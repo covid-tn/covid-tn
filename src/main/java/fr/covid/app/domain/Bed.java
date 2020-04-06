@@ -23,6 +23,9 @@ public class Bed implements Serializable {
     @Field("status")
     private BedStatus status;
 
+    @Field("name")
+    private String name;
+
     @DBRef
     @Field("hospital")
     @JsonIgnoreProperties("beds")
@@ -48,6 +51,19 @@ public class Bed implements Serializable {
 
     public void setStatus(BedStatus status) {
         this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Bed name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Hospital getHospital() {
@@ -85,6 +101,7 @@ public class Bed implements Serializable {
         return "Bed{" +
             "id=" + getId() +
             ", status='" + getStatus() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

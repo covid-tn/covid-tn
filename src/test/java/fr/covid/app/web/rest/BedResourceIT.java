@@ -37,6 +37,9 @@ public class BedResourceIT {
     private static final BedStatus DEFAULT_STATUS = BedStatus.AVAILABLE;
     private static final BedStatus UPDATED_STATUS = BedStatus.RESERVED;
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     @Autowired
     private BedRepository bedRepository;
 
@@ -79,7 +82,8 @@ public class BedResourceIT {
      */
     public static Bed createEntity() {
         Bed bed = new Bed()
-            .status(DEFAULT_STATUS);
+            .status(DEFAULT_STATUS)
+            .name(DEFAULT_NAME);
         return bed;
     }
     /**
@@ -90,7 +94,8 @@ public class BedResourceIT {
      */
     public static Bed createUpdatedEntity() {
         Bed bed = new Bed()
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .name(UPDATED_NAME);
         return bed;
     }
 
@@ -115,6 +120,7 @@ public class BedResourceIT {
         assertThat(bedList).hasSize(databaseSizeBeforeCreate + 1);
         Bed testBed = bedList.get(bedList.size() - 1);
         assertThat(testBed.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testBed.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -146,7 +152,8 @@ public class BedResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(bed.getId())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -159,7 +166,8 @@ public class BedResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(bed.getId()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
@@ -179,7 +187,8 @@ public class BedResourceIT {
         // Update the bed
         Bed updatedBed = bedRepository.findById(bed.getId()).get();
         updatedBed
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .name(UPDATED_NAME);
 
         restBedMockMvc.perform(put("/api/beds")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -191,6 +200,7 @@ public class BedResourceIT {
         assertThat(bedList).hasSize(databaseSizeBeforeUpdate);
         Bed testBed = bedList.get(bedList.size() - 1);
         assertThat(testBed.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testBed.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

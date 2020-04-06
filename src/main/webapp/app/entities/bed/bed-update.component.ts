@@ -23,6 +23,7 @@ export class BedUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     status: [],
+    name: [],
     hospital: []
   });
 
@@ -52,6 +53,7 @@ export class BedUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: bed.id,
       status: bed.status,
+      name: bed.name,
       hospital: bed.hospital
     });
   }
@@ -75,6 +77,7 @@ export class BedUpdateComponent implements OnInit {
       ...new Bed(),
       id: this.editForm.get(['id'])!.value,
       status: this.editForm.get(['status'])!.value,
+      name: this.editForm.get(['name'])!.value,
       hospital: this.editForm.get(['hospital'])!.value
     };
   }
