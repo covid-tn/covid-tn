@@ -119,21 +119,8 @@ export class BedComponent implements OnInit, OnDestroy {
       }
     });
 
-    // TODO : Remove me as sooooooooooooon as possible !!!!!
-    if (this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
-      this.beds = data ? data : [];
-      this.filtredbeds = this.filtredbedsbystatus = this.beds;
-    } else {
-      this.beds = data
-        ? data.filter(bed => {
-            if (bed && bed.hospital) {
-              return bed.hospital.name === 'Hopital test';
-            }
-            return false;
-          })
-        : [];
-      this.filtredbeds = this.filtredbedsbystatus = this.beds;
-    }
+    this.beds = data ? data : [];
+    this.filtredbeds = this.filtredbedsbystatus = this.beds;
   }
 
   //  To Filter Beds By Status
